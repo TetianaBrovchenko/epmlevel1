@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 public class CommandLineArguments {
     public static void main(String[] args) {
+        //2.	Отобразить в окне консоли аргументы командной строки в обратном порядке.
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter numbers : ");
         int value = scanner.nextInt();
