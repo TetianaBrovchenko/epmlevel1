@@ -20,9 +20,9 @@ public class FindMinMaxNumbers {
 
     private static int getShortestNumber(int[] newArrayForOptionalTask1) {
         int resultShortestNumber = newArrayForOptionalTask1[0];
-        for (int i = 0; i < newArrayForOptionalTask1.length; i++) {
-            if (resultShortestNumber > newArrayForOptionalTask1[i]) {
-                resultShortestNumber = newArrayForOptionalTask1[i];
+        for (int j : newArrayForOptionalTask1) {
+            if (resultShortestNumber > j) {
+                resultShortestNumber = j;
             }
         }
         return resultShortestNumber;
@@ -31,9 +31,9 @@ public class FindMinMaxNumbers {
 
     private static int getLongestNumber(int[] newArrayForOptionalTask1) {
         int resultLongestNumber = newArrayForOptionalTask1[0];
-        for (int i = 0; i < newArrayForOptionalTask1.length; i++) {
-            if (newArrayForOptionalTask1[i] > resultLongestNumber) {
-                resultLongestNumber = newArrayForOptionalTask1[i];
+        for (int j : newArrayForOptionalTask1) {
+            if (j > resultLongestNumber) {
+                resultLongestNumber = j;
             }
         }
         return resultLongestNumber;
