@@ -6,14 +6,14 @@ package pl.epam.course.ta.level1.classes;
 //        несколько конструкторов.
 
 public class House {
-    //        6. House: id, Номер квартиры, Площадь, Этаж, Количество комнат, Улица, Тип здания, Срок эксплуатации.
+    //6. House: id, Номер квартиры, Площадь, Этаж, Количество комнат, Улица, Тип здания, Срок эксплуатации.
     int id;                         //Идентификатор дома
     int numerApartment;             // Номер квартиры
     double squareApartment;         // Площадь квартиры
     int floorApartment;             //Этаж дома
     int amountRoomsApartment;       // Количество комнат в квартире
     String streetOfHouse;           // Улица
-    String buildingType;          // Тип дома
+    String buildingType;            // Тип дома
     int lifeTime;                   // Срок эксплуатации
 
     public House() {
@@ -30,6 +30,7 @@ public class House {
         this.buildingType = buildingType;
         this.lifeTime = lifeTime;
     }
+
 
     public int getId() {
         return id;
@@ -79,13 +80,6 @@ public class House {
         this.streetOfHouse = streetOfHouse;
     }
 
-    public String getBuildingType() {
-        return buildingType;
-    }
-
-    public void setBuildingType(String buildingType) {
-        this.buildingType = buildingType;
-    }
 
     public int getLifeTime() {
         return lifeTime;
