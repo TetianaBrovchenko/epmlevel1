@@ -1,9 +1,6 @@
 package pl.epam.course.ta.level1.collections.main;
 
 import java.util.*;
-import java.util.stream.Collectors;
-
-import static java.util.Comparator.comparing;
 
 public class ChifCooker {
 
@@ -25,24 +22,26 @@ public class ChifCooker {
         Vegetable vegetableEggplant = new Vegetable("Баклажан", 25, VegetableCrop.NIGHTSHADE);
 
         Recipe salade = new Recipe("Овощной салат");
-        salade.addIngredient(new Ingredient(vegetablePotatoe, 200));
-        salade.addIngredient(new Ingredient(vegetablePotatoe, 200));
-        salade.addIngredient(new Ingredient(vegetableCarrot, 150));
+        salade.addIngredient(new Ingredient(vegetablePotatoe, 75));
+        salade.addIngredient(new Ingredient(vegetableCarrot, 75));
         salade.addIngredient(new Ingredient(vegetableRadishe, 100));
         salade.addIngredient(new Ingredient(vegetableCelery, 100));
-        salade.addIngredient(new Ingredient(vegetableDill, 100));
-        salade.addIngredient(new Ingredient(vegetableOnion, 150));
+        salade.addIngredient(new Ingredient(vegetableDill, 5));
+        salade.addIngredient(new Ingredient(vegetableOnion, 15));
 
         int calorieContentOfSalad = calculateCalorieContentOfDish(salade);
         System.out.println("Калорийность салата " + calorieContentOfSalad + " ккалл на 100 гр");
 
-        Recipe saladeSortedIngredient = sortIngredientsSalad(salade);
-        System.out.println("Ингредиенты салата отсортированные по названию овощей " + saladeSortedIngredient);
+        Set<Ingredient> saladeSortedIngredients = sortSaladIngredients(salade);
+        System.out.println("\nИнгредиенты салата '" + salade.getName() + "' отсортированные по калорийности: ");
+        saladeSortedIngredients.stream().forEach(ingredient -> {
+            System.out.println(ingredient.getPlant().getName() + "(" + ingredient.getWeight() +"g): " +
+                    ingredient.getCalorieContent()+ "kcal.");
+        });
 
         Set<Vegetable> foundVegetables = findVegetablesInTargetCalorieRange(salade);
-        System.out.println("Овощи в салате, у которых калорийность не превышает 40 ккал/100 гр :"
+        System.out.println("\nОвощи в салате, у которых калорийность не превышает 40 ккал/100 гр :"
                 + Arrays.toString(foundVegetables.stream().map(vegetable -> vegetable.getName()).toArray()));
-
     }
 
     private static int calculateCalorieContentOfDish(Recipe salade) {
@@ -52,19 +51,19 @@ public class ChifCooker {
         Iterator<Ingredient> it = salade.getIngredients().iterator();
         while (it.hasNext()) {
             Ingredient ingredient = it.next();
-            calorieContentOfDish += calorieContent(ingredient);
+            calorieContentOfDish += ingredient.getCalorieContent();
             wholeWeight += ingredient.getWeight();
         }
-        return calorieContentOfDish / (wholeWeight / 100);
+        return calorieContentOfDish * 100 / wholeWeight ;
     }
 
-    private static int calorieContent(Ingredient ingredient) {
-        return ingredient.getWeight() / 100 * ingredient.getPlant().getCalorieContent();
-    }
+    private static Set<Ingredient> sortSaladIngredients(Recipe salade) {
+        Comparator<Ingredient> byCalorieContentComparator = new IngredientsByCalorieContentComparator();
+        TreeSet<Ingredient> result = new TreeSet<>(byCalorieContentComparator);
+        result.addAll(salade.getIngredients());
+        return result.descendingSet();
+        }
 
-    private static Recipe sortIngredientsSalad(Recipe salade) {
-        return null;
-    }
 
     private static Set<Vegetable> findVegetablesInTargetCalorieRange(Recipe salade) {
         Set<Vegetable> vegetables = new HashSet<>();

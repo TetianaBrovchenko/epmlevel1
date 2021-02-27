@@ -16,4 +16,16 @@ public class Ingredient {
     public int getWeight() {
         return weight;
     }
+
+    public Integer getCalorieContent() {
+        return plant.getCalorieContent() * getWeight() / 100;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "plant=" + plant +
+                ", weight=" + weight +
+                '}';
+    }
 }

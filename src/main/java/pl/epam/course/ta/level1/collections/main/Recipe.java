@@ -30,4 +30,7 @@ public class Recipe {
         return ingredients;
     }
 
+    public String getName() {
+        return name;
+    }
 }
